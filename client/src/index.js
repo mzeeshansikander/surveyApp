@@ -11,8 +11,7 @@ import reduxThunk from 'redux-thunk'
 const store = createStore(reducers,{},applyMiddleware(reduxThunk));
 
 ReactDOM.render(
-    <Provider store={store}>
-        <App />
-    </Provider>
+    <Provider store={store}><App /></Provider>,
+    document.querySelector('#root')
+);
 
-    ,document.querySelector('#root'))

@@ -11,7 +11,13 @@ module.exports = app => {
             scope: ['profile','email']    
         })
     );
-    app.get('/auth/google/callback',passport.authenticate('google'));
+    app.get(
+        '/auth/google/callback',
+        passport.authenticate('google'),
+        (req,res)=>{
+            res.redirect('/surveys')
+        }
+        );
 
     app.get('/api/current_user',(req,res)=>{
         res.send(req.user);
@@ -20,8 +26,9 @@ module.exports = app => {
 
     app.get('/api/logout',(req,res)=>{
         req.logout();
-        res.send({
-            Message: "User is successfully logged out"
-        })
+        res.redirect('/')
+        // res.send({
+        //     Message: "User is successfully logged out"
+        // })
     })
 }
